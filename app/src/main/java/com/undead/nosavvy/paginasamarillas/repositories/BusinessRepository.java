@@ -4,6 +4,8 @@ import com.undead.nosavvy.paginasamarillas.models.Business;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by nosavvy on 4/5/18.
@@ -38,7 +40,9 @@ public class BusinessRepository {
     public static List<Business> search(String word){
         //List<Business> result = business.filter(p -> p.tag.equals());
         //FUNCION LAMBDA
-        List<Business> result = (List<Business>) business.stream().filter(p -> p.getTag().equals(word));
+        //List<Business> result = (List<Business>) business.stream().filter(p -> p.getTag().equals(word));
+        Stream<Business> bstream = business.stream().filter(p -> p.getTag().equals(word));
+        List<Business> result = bstream.collect(Collectors.toList());
         return result;
     }
 }
